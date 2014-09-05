@@ -70,11 +70,11 @@ public class SearchClient {
 	}
 
 	private String getSearchUrl(){
-		return (secure ? "https://" : "http://") + siteKey + ".search.unbxdapi.com/" + apiKey + "/search?wt=json";
+		return (secure ? "https://" : "http://") + "search.unbxdapi.com/" + apiKey + "/" + siteKey + "/search?wt=json";
 	}
 
 	private String getBrowseUrl(){
-		return (secure ? "https://" : "http://") + siteKey + ".search.unbxdapi.com/" + apiKey + "/browse?wt=json";
+		return (secure ? "https://" : "http://") + "search.unbxdapi.com/" + apiKey + "/" + siteKey + "/browse?wt=json";
 	}
 
 	/**
