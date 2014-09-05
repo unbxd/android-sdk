@@ -2,3 +2,7 @@ assets/*
 bin/*
 libs/*
 gen/*
+*.DS_Store
+.metadata/
+src/.DS_Store
+
