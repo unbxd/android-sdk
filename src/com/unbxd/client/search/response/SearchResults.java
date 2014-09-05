@@ -13,37 +13,37 @@ import java.util.Map;
  */
 public class SearchResults {
 
-    private int _resultsCount;
-    private List<SearchResult> _results;
+	private int _resultsCount;
+	private List<SearchResult> _results;
 
-    protected SearchResults(List<Map<String, Object>> products){
-        this._resultsCount = products.size();
+	protected SearchResults(List<Map<String, Object>> products){
+		this._resultsCount = products.size();
 
-        this._results = new ArrayList<SearchResult>();
-        for(Map<String, Object> product : products){
-            this._results.add(new SearchResult(product));
-        }
-    }
+		this._results = new ArrayList<SearchResult>();
+		for(Map<String, Object> product : products){
+			this._results.add(new SearchResult(product));
+		}
+	}
 
-    /**
-     * @return Number of results
-     */
-    public int getResultsCount(){
-        return _resultsCount;
-    }
+	/**
+	 * @return Number of results
+	 */
+	public int getResultsCount(){
+		return _resultsCount;
+	}
 
-    public SearchResult getAt(int i){
-        if(i >= _resultsCount)
-            return null;
+	public SearchResult getAt(int i){
+		if(i >= _resultsCount)
+			return null;
 
-        return this._results.get(i);
-    }
+		return this._results.get(i);
+	}
 
-    /**
-     * @return List of products. Refer {@link SearchResult}
-     */
-    public List<SearchResult> getResults(){
-        return _results;
-    }
+	/**
+	 * @return List of products. Refer {@link SearchResult}
+	 */
+	public List<SearchResult> getResults(){
+		return _results;
+	}
 
 }

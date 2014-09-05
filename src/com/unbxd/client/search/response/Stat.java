@@ -11,38 +11,38 @@ import java.util.Map;
  */
 public class Stat {
 
-    private double _min;
-    private double _max;
-    private int _count;
-    private double _sum;
-    private double _mean;
+	private double _min;
+	private double _max;
+	private int _count;
+	private double _sum;
+	private double _mean;
 
-    protected Stat(Map<String, Object> params){
-        this._min = ((Number)params.get("min")).doubleValue();
-        this._max = ((Number)params.get("max")).doubleValue();
-        this._count = ((Number)params.get("count")).intValue();
-        this._sum = ((Number)params.get("sum")).doubleValue();
-        this._mean = ((Number)params.get("mean")).doubleValue();
-    }
+	protected Stat(Map<String, Object> params){
+		this._min = ((Number)params.get("min")).doubleValue();
+		this._max = ((Number)params.get("max")).doubleValue();
+		this._count = ((Number)params.get("count")).intValue();
+		this._sum = ((Number)params.get("sum")).doubleValue();
+		this._mean = ((Number)params.get("mean")).doubleValue();
+	}
 
-    public int getCount(){
-        return this._count;
-    }
+	public int getCount(){
+		return this._count;
+	}
 
-    public double getMin(){
-        return this._min;
-    }
+	public double getMin(){
+		return this._min;
+	}
 
-    public double getMax(){
-        return this._max;
-    }
+	public double getMax(){
+		return this._max;
+	}
 
-    public double getSum(){
-        return this._sum;
-    }
+	public double getSum(){
+		return this._sum;
+	}
 
-    public double getMean(){
-        return this._mean;
-    }
+	public double getMean(){
+		return this._mean;
+	}
 
 }

@@ -15,52 +15,52 @@ import java.util.Map;
  */
 public class AutoSuggestResults {
 
-    private Map<AutoSuggestType, AutoSuggestResultSection> _resultSections;
+	private Map<AutoSuggestType, AutoSuggestResultSection> _resultSections;
 
-    protected AutoSuggestResults(List<Map<String, Object>> params) {
-        this._resultSections = new HashMap<AutoSuggestType, AutoSuggestResultSection>();
-        for(Map<String, Object> result : params){
-            AutoSuggestType type = AutoSuggestType.valueOf((String) result.get("doctype"));
-            if(!this._resultSections.containsKey(type))
-                this._resultSections.put(type, new AutoSuggestResultSection(type));
+	protected AutoSuggestResults(List<Map<String, Object>> params) {
+		this._resultSections = new HashMap<AutoSuggestType, AutoSuggestResultSection>();
+		for(Map<String, Object> result : params){
+			AutoSuggestType type = AutoSuggestType.valueOf((String) result.get("doctype"));
+			if(!this._resultSections.containsKey(type))
+				this._resultSections.put(type, new AutoSuggestResultSection(type));
 
-            this._resultSections.get(type).addResult(result);
-        }
-    }
+			this._resultSections.get(type).addResult(result);
+		}
+	}
 
-    /**
-     * @return Get response in sections. Map {@link AutoSuggestType} --> @{@link AutoSuggestResultSection}
-     */
-    public Map<AutoSuggestType, AutoSuggestResultSection> getResultSections(){
-        return this._resultSections;
-    }
+	/**
+	 * @return Get response in sections. Map {@link AutoSuggestType} --> @{@link AutoSuggestResultSection}
+	 */
+	public Map<AutoSuggestType, AutoSuggestResultSection> getResultSections(){
+		return this._resultSections;
+	}
 
-    /**
-     * @return Get suggestions in buckets
-     */
-    public AutoSuggestResultSection getBuckets(){
-        return this._resultSections.get(AutoSuggestType.IN_FIELD);
-    }
+	/**
+	 * @return Get suggestions in buckets
+	 */
+	public AutoSuggestResultSection getBuckets(){
+		return this._resultSections.get(AutoSuggestType.IN_FIELD);
+	}
 
-    /**
-     * @return Get Popular products
-     */
-    public AutoSuggestResultSection getPopularProducts(){
-        return this._resultSections.get(AutoSuggestType.POPULAR_PRODUCTS);
-    }
+	/**
+	 * @return Get Popular products
+	 */
+	public AutoSuggestResultSection getPopularProducts(){
+		return this._resultSections.get(AutoSuggestType.POPULAR_PRODUCTS);
+	}
 
-    /**
-     * @return Get suggestions based on keyword
-     */
-    public AutoSuggestResultSection getKeywordSuggestions(){
-        return this._resultSections.get(AutoSuggestType.KEYWORD_SUGGESTION);
-    }
+	/**
+	 * @return Get suggestions based on keyword
+	 */
+	public AutoSuggestResultSection getKeywordSuggestions(){
+		return this._resultSections.get(AutoSuggestType.KEYWORD_SUGGESTION);
+	}
 
-    /**
-     * @return Get Top Queries
-     */
-    public AutoSuggestResultSection getTopQueries(){
-        return this._resultSections.get(AutoSuggestType.TOP_SEARCH_QUERIES);
-    }
+	/**
+	 * @return Get Top Queries
+	 */
+	public AutoSuggestResultSection getTopQueries(){
+		return this._resultSections.get(AutoSuggestType.TOP_SEARCH_QUERIES);
+	}
 
 }

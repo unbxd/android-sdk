@@ -12,26 +12,26 @@ import java.util.Map;
  */
 public class BucketResult {
 
-    private int _totalResultsCount;
-    private SearchResults _results;
+	private int _totalResultsCount;
+	private SearchResults _results;
 
-    protected BucketResult(Map<String, Object> params){
-        this._totalResultsCount = (Integer) params.get("numberOfProducts");
-        this._results = new SearchResults((List<Map<String, Object>>) params.get("products"));
-    }
+	protected BucketResult(Map<String, Object> params){
+		this._totalResultsCount = (Integer) params.get("numberOfProducts");
+		this._results = new SearchResults((List<Map<String, Object>>) params.get("products"));
+	}
 
-    /**
-     * @return Total number of results found.
-     */
-    public int getTotalResultsCount(){
-        return this._totalResultsCount;
-    }
+	/**
+	 * @return Total number of results found.
+	 */
+	public int getTotalResultsCount(){
+		return this._totalResultsCount;
+	}
 
-    /**
-     * @return Results in this bucket. Refer {@link SearchResults}
-     */
-    public SearchResults getResults(){
-        return this._results;
-    }
+	/**
+	 * @return Results in this bucket. Refer {@link SearchResults}
+	 */
+	public SearchResults getResults(){
+		return this._results;
+	}
 
 }

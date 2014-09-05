@@ -13,56 +13,56 @@ import java.util.Map;
  */
 public class Facet {
 
-    protected String name;
-    protected String _type;
-    protected List<FacetEntry> _facetEntries;
+	protected String name;
+	protected String _type;
+	protected List<FacetEntry> _facetEntries;
 
-    protected Facet(String facetName, Map<String, Object> params){
-        this.name = facetName;
-        this._type = (String) params.get("type");
+	protected Facet(String facetName, Map<String, Object> params){
+		this.name = facetName;
+		this._type = (String) params.get("type");
 
-        if(params.get("values") instanceof Map){
-            Map<String, Object> map = (Map<String, Object>) params.get("values");
-            this.generateEntries((List<Object>) map.get("counts"));
-        }else{
-            this.generateEntries((List<Object>) params.get("values"));
-        }
-    }
+		if(params.get("values") instanceof Map){
+			Map<String, Object> map = (Map<String, Object>) params.get("values");
+			this.generateEntries((List<Object>) map.get("counts"));
+		}else{
+			this.generateEntries((List<Object>) params.get("values"));
+		}
+	}
 
-    /**
-     * @return Facet name
-     */
-    public String getName(){
-        return this.name;
-    }
+	/**
+	 * @return Facet name
+	 */
+	public String getName(){
+		return this.name;
+	}
 
-    /**
-     * @return Type of facet
-     */
-    public String getType(){
-        return this._type;
-    }
+	/**
+	 * @return Type of facet
+	 */
+	public String getType(){
+		return this._type;
+	}
 
-    protected void generateEntries(List<Object> values){
-        this._facetEntries = new ArrayList<FacetEntry>();
+	protected void generateEntries(List<Object> values){
+		this._facetEntries = new ArrayList<FacetEntry>();
 
-        String term = null;
+		String term = null;
 
-        for(int i = 0; i < values.size(); i++){
-            if(i % 2 == 0){
-                term = (String) values.get(i);
-            }else{
-                int count = (Integer)values.get(i);
-                this._facetEntries.add(new FacetEntry(term, count));
-            }
-        }
-    }
+		for(int i = 0; i < values.size(); i++){
+			if(i % 2 == 0){
+				term = (String) values.get(i);
+			}else{
+				int count = (Integer)values.get(i);
+				this._facetEntries.add(new FacetEntry(term, count));
+			}
+		}
+	}
 
-    /**
-     * @return List of {@link FacetEntry}
-     */
-    public List<FacetEntry> getEntries(){
-        return this._facetEntries;
-    }
+	/**
+	 * @return List of {@link FacetEntry}
+	 */
+	 public List<FacetEntry> getEntries(){
+		 return this._facetEntries;
+	 }
 
 }

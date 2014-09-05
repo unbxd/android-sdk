@@ -9,11 +9,11 @@ package com.unbxd.client.search.exceptions;
  */
 public class SearchException extends Exception{
 
-    public SearchException(String message) {
-        super(message);
-    }
+	public SearchException(String message) {
+		super(message);
+	}
 
-    public SearchException(Throwable cause) {
-        super(cause);
-    }
+	public SearchException(Throwable cause) {
+		super(cause);
+	}
 }

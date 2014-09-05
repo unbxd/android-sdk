@@ -9,23 +9,23 @@ package com.unbxd.client.search.response;
  */
 public class FacetEntry {
 
-    private String term;
-    private int count;
+	private String term;
+	private int count;
 
-    protected FacetEntry(int count) {
-        this.count = count;
-    }
+	protected FacetEntry(int count) {
+		this.count = count;
+	}
 
-    public FacetEntry(String term, int count) {
-        this.term = term;
-        this.count = count;
-    }
+	public FacetEntry(String term, int count) {
+		this.term = term;
+		this.count = count;
+	}
 
-    public String getTerm(){
-        return this.term;
-    }
+	public String getTerm(){
+		return this.term;
+	}
 
-    public int getCount(){
-        return this.count;
-    }
+	public int getCount(){
+		return this.count;
+	}
 }

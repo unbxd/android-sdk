@@ -14,11 +14,11 @@ package com.unbxd.client.unbxdanalytics.exception;
  */
 public class UnbxdAnalyticsException extends Exception{
 	public UnbxdAnalyticsException(String message) {
-        super(message);
-    }
+		super(message);
+	}
 
-    public UnbxdAnalyticsException(Throwable cause) {
-        super(cause);
-    }
+	public UnbxdAnalyticsException(Throwable cause) {
+		super(cause);
+	}
 
 }

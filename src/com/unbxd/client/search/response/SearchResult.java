@@ -11,33 +11,33 @@ import java.util.Map;
  */
 public class SearchResult {
 
-    private String _uniqueId;
-    private Map<String, Object> _attributes;
+	private String _uniqueId;
+	private Map<String, Object> _attributes;
 
-    protected SearchResult(Map<String, Object> product){
-        this._attributes = product;
-        this._uniqueId = (String) _attributes.get("uniqueId");
-    }
+	protected SearchResult(Map<String, Object> product){
+		this._attributes = product;
+		this._uniqueId = (String) _attributes.get("uniqueId");
+	}
 
-    /**
-     * @return Attributes of the product
-     */
-    public Map<String, Object> getAttributes(){
-        return this._attributes;
-    }
+	/**
+	 * @return Attributes of the product
+	 */
+	public Map<String, Object> getAttributes(){
+		return this._attributes;
+	}
 
-    /**
-     * @return Unique Id of the product
-     */
-    public String getUniqueId(){
-        return this._uniqueId;
-    }
+	/**
+	 * @return Unique Id of the product
+	 */
+	public String getUniqueId(){
+		return this._uniqueId;
+	}
 
-    /**
-     * @param fieldName
-     * @return Attribute of the product for given field name
-     */
-    public Object getAttribute(String fieldName){
-        return this._attributes.get(fieldName);
-    }
+	/**
+	 * @param fieldName
+	 * @return Attribute of the product for given field name
+	 */
+	public Object getAttribute(String fieldName){
+		return this._attributes.get(fieldName);
+	}
 }

@@ -13,29 +13,29 @@ import java.util.Map;
  */
 public class RangeFacet extends Facet{
 
-    private double _gap;
-    protected List<RangeFacetEntry> _rangeFacetEntries;
+	private double _gap;
+	protected List<RangeFacetEntry> _rangeFacetEntries;
 
-    protected RangeFacet(String facetName, Map<String, Object> params) {
-        super(facetName, params);
+	protected RangeFacet(String facetName, Map<String, Object> params) {
+		super(facetName, params);
 
-        this._gap = ((Number) ((Map<String, Object>)params.get("values")).get("gap")).doubleValue();
-    }
+		this._gap = ((Number) ((Map<String, Object>)params.get("values")).get("gap")).doubleValue();
+	}
 
-    @Override
-    protected void generateEntries(List<Object> values) {
-        super.generateEntries(values);
+	@Override
+	protected void generateEntries(List<Object> values) {
+		super.generateEntries(values);
 
-        this._rangeFacetEntries = new ArrayList<RangeFacetEntry>();
-        for(FacetEntry entry : _facetEntries){
-            double from = Double.parseDouble(entry.getTerm());
-            double to = from + _gap;
-            this._rangeFacetEntries.add(new RangeFacetEntry(from, to, entry.getCount()));
-        }
-    }
+		this._rangeFacetEntries = new ArrayList<RangeFacetEntry>();
+		for(FacetEntry entry : _facetEntries){
+			double from = Double.parseDouble(entry.getTerm());
+			double to = from + _gap;
+			this._rangeFacetEntries.add(new RangeFacetEntry(from, to, entry.getCount()));
+		}
+	}
 
-    public List<RangeFacetEntry> getRangeEntries(){
-        return this._rangeFacetEntries;
-    }
+	public List<RangeFacetEntry> getRangeEntries(){
+		return this._rangeFacetEntries;
+	}
 
 }

@@ -19,14 +19,14 @@ public interface AsyncResponse {
 	 * Function which registers the successful response
 	 */
 	void processResponse(String output);
-	
-	
+
+
 	/*
 	 * Function which registers the errors
 	 */
-	
+
 	void processErrors(String output);
-	
-	
+
+
 
 }

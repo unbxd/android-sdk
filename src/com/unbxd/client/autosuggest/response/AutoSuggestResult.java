@@ -11,32 +11,32 @@ import java.util.Map;
  */
 public class AutoSuggestResult {
 
-    private Map<String, Object> _attributes;
+	private Map<String, Object> _attributes;
 
-    protected AutoSuggestResult(Map<String, Object> params) {
-        this._attributes = params;
-    }
+	protected AutoSuggestResult(Map<String, Object> params) {
+		this._attributes = params;
+	}
 
-    /**
-     * @return Attributes of the product
-     */
-    public Map<String, Object> getAttributes(){
-        return this._attributes;
-    }
+	/**
+	 * @return Attributes of the product
+	 */
+	public Map<String, Object> getAttributes(){
+		return this._attributes;
+	}
 
-    /**
-     * @param fieldName
-     * @return Attribute of the product for given field name
-     */
-    public Object getAttribute(String fieldName){
-        return this._attributes.get(fieldName);
-    }
+	/**
+	 * @param fieldName
+	 * @return Attribute of the product for given field name
+	 */
+	public Object getAttribute(String fieldName){
+		return this._attributes.get(fieldName);
+	}
 
-    /**
-     * @return Get Suggestion
-     */
-    public String getSuggestion(){
-        return (String) this.getAttribute("autosuggest");
-    }
+	/**
+	 * @return Get Suggestion
+	 */
+	public String getSuggestion(){
+		return (String) this.getAttribute("autosuggest");
+	}
 
 }

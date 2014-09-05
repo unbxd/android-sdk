@@ -8,8 +8,8 @@ package com.unbxd.client.autosuggest;
  * To change this template use File | Settings | File Templates.
  */
 public enum AutoSuggestType {
-    IN_FIELD,
-    POPULAR_PRODUCTS,
-    TOP_SEARCH_QUERIES,
-    KEYWORD_SUGGESTION
+	IN_FIELD,
+	POPULAR_PRODUCTS,
+	TOP_SEARCH_QUERIES,
+	KEYWORD_SUGGESTION
 }

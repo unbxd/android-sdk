@@ -12,73 +12,73 @@ import java.util.Map;
  */
 public class AutoSuggestResponse {
 
-    private int _statusCode;
-    private int _errorCode;
-    private String _message;
-    private int _queryTime;
-    private int _totalResultsCount;
-    private AutoSuggestResults _results;
+	private int _statusCode;
+	private int _errorCode;
+	private String _message;
+	private int _queryTime;
+	private int _totalResultsCount;
+	private AutoSuggestResults _results;
 
-    public AutoSuggestResponse(Map<String, Object> params) {
-        if(params.containsKey("error")){
-            Map<String, Object> error = (Map<String, Object>) params.get("error");
-            this._errorCode = (Integer) error.get("code");
-            this._message = (String) error.get("msg");
-        }else{
-            this._message = "OK";
+	public AutoSuggestResponse(Map<String, Object> params) {
+		if(params.containsKey("error")){
+			Map<String, Object> error = (Map<String, Object>) params.get("error");
+			this._errorCode = (Integer) error.get("code");
+			this._message = (String) error.get("msg");
+		}else{
+			this._message = "OK";
 
-            Map<String, Object> metaData = (Map<String, Object>) params.get("searchMetaData");
+			Map<String, Object> metaData = (Map<String, Object>) params.get("searchMetaData");
 
-            this._statusCode = (Integer) metaData.get("status");
-            this._queryTime = (Integer) metaData.get("queryTime");
+			this._statusCode = (Integer) metaData.get("status");
+			this._queryTime = (Integer) metaData.get("queryTime");
 
-            if(params.containsKey("response")){
-                Map<String, Object> response = (Map<String, Object>) params.get("response");
-                this._totalResultsCount = (Integer) response.get("numberOfProducts");
-                this._results = new AutoSuggestResults((List<Map<String, Object>>) response.get("products"));
-            }
-        }
-    }
+			if(params.containsKey("response")){
+				Map<String, Object> response = (Map<String, Object>) params.get("response");
+				this._totalResultsCount = (Integer) response.get("numberOfProducts");
+				this._results = new AutoSuggestResults((List<Map<String, Object>>) response.get("products"));
+			}
+		}
+	}
 
-    /**
-     * @return Status Code. 200 if OK.
-     */
-    public int getStatusCode(){
-        return this._statusCode;
-    }
+	/**
+	 * @return Status Code. 200 if OK.
+	 */
+	public int getStatusCode(){
+		return this._statusCode;
+	}
 
-    /**
-     * @return Error code in case of an error.
-     */
-    public int getErrorCode(){
-        return this._errorCode;
-    }
+	/**
+	 * @return Error code in case of an error.
+	 */
+	public int getErrorCode(){
+		return this._errorCode;
+	}
 
-    /**
-     * @return OK if successfull. Error message otherwise
-     */
-    public String getMessage(){
-        return this._message;
-    }
+	/**
+	 * @return OK if successfull. Error message otherwise
+	 */
+	public String getMessage(){
+		return this._message;
+	}
 
-    /**
-     * @return Time taken to query results in milliseconds
-     */
-    public int getQueryTime(){
-        return this._queryTime;
-    }
+	/**
+	 * @return Time taken to query results in milliseconds
+	 */
+	public int getQueryTime(){
+		return this._queryTime;
+	}
 
-    /**
-     * @return Total number of results found.
-     */
-    public int getTotalResultsCount(){
-        return this._totalResultsCount;
-    }
+	/**
+	 * @return Total number of results found.
+	 */
+	public int getTotalResultsCount(){
+		return this._totalResultsCount;
+	}
 
-    /**
-     * @return Results. Refer {@link AutoSuggestResults}
-     */
-    public AutoSuggestResults getResults(){
-        return _results;
-    }
+	/**
+	 * @return Results. Refer {@link AutoSuggestResults}
+	 */
+	public AutoSuggestResults getResults(){
+		return _results;
+	}
 }

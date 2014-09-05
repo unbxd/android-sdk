@@ -9,22 +9,22 @@ package com.unbxd.client.search.response;
  */
 public class RangeFacetEntry extends FacetEntry{
 
-    private double from;
-    private double to;
+	private double from;
+	private double to;
 
-    public RangeFacetEntry(double from, double to, int count) {
-        super(count);
+	public RangeFacetEntry(double from, double to, int count) {
+		super(count);
 
-        this.from = from;
-        this.to = to;
-    }
+		this.from = from;
+		this.to = to;
+	}
 
-    public double getFrom(){
-        return this.from;
-    }
+	public double getFrom(){
+		return this.from;
+	}
 
-    public double getTo(){
-        return this.to;
-    }
+	public double getTo(){
+		return this.to;
+	}
 
 }

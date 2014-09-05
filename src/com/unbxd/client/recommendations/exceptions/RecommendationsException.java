@@ -9,11 +9,11 @@ package com.unbxd.client.recommendations.exceptions;
  */
 public class RecommendationsException extends Exception{
 
-    public RecommendationsException(String message) {
-        super(message);
-    }
+	public RecommendationsException(String message) {
+		super(message);
+	}
 
-    public RecommendationsException(Throwable cause) {
-        super(cause);
-    }
+	public RecommendationsException(Throwable cause) {
+		super(cause);
+	}
 }

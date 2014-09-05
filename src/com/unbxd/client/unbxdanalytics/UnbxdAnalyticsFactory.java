@@ -13,8 +13,8 @@ import android.content.Context;
  * UnbxdAnalyticsFactory.java
  */
 public class UnbxdAnalyticsFactory {
-	 public static UnbxdAnalytics getUnbxdAanalytics(Context context,String siteKey, String apiKey, boolean secure){
-	        return new UnbxdAnalytics(context,siteKey, apiKey, secure);
-	    }
+	public static UnbxdAnalytics getUnbxdAanalytics(Context context, String siteKey, String apiKey, boolean secure){
+		return new UnbxdAnalytics(context, siteKey, apiKey, secure);
+	}
 
 }

@@ -12,29 +12,29 @@ import java.util.Map;
  */
 public class Stats {
 
-    private Map<String, Stat> _stats;
+	private Map<String, Stat> _stats;
 
-    protected Stats(Map<String, Object> params){
-        this._stats = new HashMap<String, Stat>();
-        for(String field : params.keySet()){
-            if(params.get(field) != null)
-                this._stats.put(field, new Stat((Map<String, Object>) params.get(field)));
-        }
-    }
+	protected Stats(Map<String, Object> params){
+		this._stats = new HashMap<String, Stat>();
+		for(String field : params.keySet()){
+			if(params.get(field) != null)
+				this._stats.put(field, new Stat((Map<String, Object>) params.get(field)));
+		}
+	}
 
-    /**
-     * @return Map of Field --> {@link Stat}
-     */
-    public Map<String, Stat> getStats(){
-        return this._stats;
-    }
+	/**
+	 * @return Map of Field --> {@link Stat}
+	 */
+	public Map<String, Stat> getStats(){
+		return this._stats;
+	}
 
-    /**
-     * @param fieldName
-     * @return Stat for the field name
-     */
-    public Stat getStat(String fieldName){
-        return this._stats.get(fieldName);
-    }
+	/**
+	 * @param fieldName
+	 * @return Stat for the field name
+	 */
+	public Stat getStat(String fieldName){
+		return this._stats.get(fieldName);
+	}
 
 }

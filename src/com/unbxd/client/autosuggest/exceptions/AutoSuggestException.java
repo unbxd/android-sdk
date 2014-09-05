@@ -9,11 +9,11 @@ package com.unbxd.client.autosuggest.exceptions;
  */
 public class AutoSuggestException extends Exception {
 
-    public AutoSuggestException(String message) {
-        super(message);
-    }
+	public AutoSuggestException(String message) {
+		super(message);
+	}
 
-    public AutoSuggestException(Throwable cause) {
-        super(cause);
-    }
+	public AutoSuggestException(Throwable cause) {
+		super(cause);
+	}
 }
