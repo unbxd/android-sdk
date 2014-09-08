@@ -1,0 +1,447 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; android-sdk-doc 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="android-sdk-doc 1.0 documentation" href="index.html" />
+    <link rel="prev" title="Welcome to android-sdk-doc’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to android-sdk-doc’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">android-sdk-doc 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This Android SDK will enable you to use full feature set of Unbxd Product and Analytics APIs.
+You will be able to do the following through this SDK:</p>
+<ul class="simple">
+<li>Make Search calls</li>
+<li>Make Autosuggest calls</li>
+<li>Make Recommendation calls</li>
+<li>Make Analytics calls to collect user engagement data</li>
+</ul>
+<p>For details you can refer to the source on <a class="reference external" href="https://github.com/unbxd/android-sdk">GitHub</a>.</p>
+</div>
+<div class="section" id="adding-the-dependency">
+<h1>Adding the dependency<a class="headerlink" href="#adding-the-dependency" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>&lt;uses-permission android:name=&#8221;android.permission.INTERNET&#8221; /&gt;</li>
+<li>&lt;uses-permission android:name=&#8221;android.permission.ACCESS_NETWORK_STATE&#8221;&gt;&lt;/uses-permission&gt;</li>
+</ul>
+</div>
+<div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>The SDK must be initialized in the following manner:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">com.unbxd.client.Unbxd</span><span class="p">;</span>
+<span class="n">Unbxd</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s">&quot;Your Site ID&quot;</span><span class="p">,</span> <span class="s">&quot;Your API Key&quot;</span><span class="p">,</span> <span class="s">&quot;Your Secret Key&quot;</span><span class="p">,</span><span class="n">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If you want all the calls to happen over an HTTPS link do the following:</p>
+<div class="highlight-python"><div class="highlight"><pre>Unbxd.configure(&quot;Your Site ID&quot;, &quot;Your API Key&quot;, &quot;Your Secret Key&quot;),true);
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-search-client">
+<h1>Using Search Client<a class="headerlink" href="#using-search-client" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="making-a-search-call">
+<h2>Making a Search Call<a class="headerlink" href="#making-a-search-call" title="Permalink to this headline">¶</a></h2>
+<p>The Search Call can be made in two different ways</p>
+<div class="section" id="sync-call">
+<h3>Sync Call<a class="headerlink" href="#sync-call" title="Permalink to this headline">¶</a></h3>
+<p>It can be used inside an <strong>AsyncTask</strong> for making the search call non blocking.</p>
+<p>The following code snippet will make a search call with query &#8220;shirts&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre>import com.unbxd.client.Unbxd;
+import com.unbxd.client.search.SearchClient;
+import com.unbxd.client.search.response.SearchResponse;
+
+
+SearchResponse response = Unbxd.getSearchClient().search(&quot;shirts&quot;, null).execute();
+</pre></div>
+</div>
+<p>The following code snippet will make a search call with query &#8220;shirts&#8221; with filters, will sort it on price and return the second page of the results:</p>
+<div class="highlight-python"><div class="highlight"><pre>SearchResponse response = Unbxd.getSearchClient()
+                .search(&quot;shirts&quot;, null)
+                .addFilter(&quot;color_fq&quot;,&quot;black&quot;)
+                .addFilter(&quot;brand_fq&quot;, &quot;Ralph Lauren&quot;)
+                .addSort(&quot;price&quot;, SearchClient.SortDir.ASC)
+                .setPage(2, 10) // 10 products per page
+                .execute();
+</pre></div>
+</div>
+<p>Extra query parameters can be added like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>Map&lt;String, String&gt; queryParams = new HashMap&lt;String, String&gt;();
+        queryParams.put(&quot;fl&quot;, &quot;title&quot;); // will return only product titles
+        queryParams.put(&quot;stats&quot;, &quot;price&quot;); // will include price stats in the response
+
+SearchResponse response = Unbxd.getSearchClient()
+                .search(&quot;shirts&quot;, queryParams)
+                .addFilter(&quot;color_fq&quot;,&quot;black&quot;)
+                .addFilter(&quot;brand_fq&quot;, &quot;Ralph Lauren&quot;)
+                .addSort(&quot;price&quot;, SearchClient.SortDir.ASC)
+                .setPage(2, 10) // 10 products per page
+                .execute();
+</pre></div>
+</div>
+</div>
+<div class="section" id="async-call">
+<h3>Async Call<a class="headerlink" href="#async-call" title="Permalink to this headline">¶</a></h3>
+<p>The following code snippet will make a search call with query &#8220;shirts&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre>import com.unbxd.client.Unbxd;
+import com.unbxd.client.search.SearchClient;
+import com.unbxd.client.AsyncResponse;
+
+AsyncResponse asyncResponse = new AsyncResponse() {
+       @Override
+       public void processResponse(String output) {
+       // TODO Auto-generated method stub
+       }
+
+       @Override
+       public void processErrors(String output) {
+       // TODO Auto-generated method stub
+
+       }
+       };
+
+Unbxd.getSearchClient()
+       .search(&quot;shirts&quot;, queryParams)
+       .addFilter(&quot;color_fq&quot;,&quot;black&quot;)
+       .addFilter(&quot;brand_fq&quot;, &quot;Ralph Lauren&quot;)
+       .addSort(&quot;price&quot;, SearchClient.SortDir.ASC)
+       .setPage(2, 10) // 10 products per page
+       .execute(asyncResponse, getApplicationContext());
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong>processResponse</strong> callback is used to process the json search response</li>
+<li><strong>processErrors</strong> callback is used to process the errors</li>
+</ul>
+</div>
+</div>
+<div class="section" id="making-a-bucketing-call">
+<h2>Making a Bucketing Call<a class="headerlink" href="#making-a-bucketing-call" title="Permalink to this headline">¶</a></h2>
+<p>The following code snippet will make a bucketing call with query &#8220;shirts&#8221; and bucket &#8220;category&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre>import com.unbxd.client.Unbxd;
+import com.unbxd.client.search.SearchClient;
+import com.unbxd.client.search.response.SearchResponse;
+
+SearchResponse response = Unbxd.getSearchClient().bucket(&quot;*&quot;, &quot;category&quot;, null).execute();
+</pre></div>
+</div>
+<p>All other options are same as the Search call</p>
+</div>
+<div class="section" id="making-a-browse-call">
+<h2>Making a Browse Call<a class="headerlink" href="#making-a-browse-call" title="Permalink to this headline">¶</a></h2>
+<p>The following code snippet will make a browse call with category id &#8220;3&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre>import com.unbxd.client.Unbxd;
+import com.unbxd.client.search.SearchClient;
+import com.unbxd.client.search.response.SearchResponse;
+
+SearchResponse response = Unbxd.getSearchClient().browse(&quot;1&quot;, null).execute();
+</pre></div>
+</div>
+<p>All other options are same as the Search call</p>
+</div>
+<div class="section" id="understanding-searchresponse">
+<h2>Understanding SearchResponse<a class="headerlink" href="#understanding-searchresponse" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>response
+|
++-&gt; .getStatusCode() // 200 if success.
++-&gt; .getErrorCode() // error code
++-&gt; .getMessage() // Get error message if any
++-&gt; .getQueryTime() // Time taken to generate results
++-&gt; .getTotalResultsCount() // Total Number of results
++-&gt; .getResults() // Results
+        |
+        +-&gt; .getResultsCount() // Number of results present
+        +-&gt; .getAt(int i) // Get at index i
+                |
+        +-&gt; .getResults() // Get results as array()
+                |
+                +-&gt; .getUniqueId() // Get Unique Id of the product
+                +-&gt; .getAttributes() // Get attributes as map
+                +-&gt; .getAttribute(String fieldName) // Get attribute with name : fieldName
++-&gt; .getFacets() // facets
+        |
+        +-&gt; .getFacets() // Get facets as list
+                |
+        +-&gt; .getFacetsAsMap() // Get facets as list
+                |
+                +-&gt; .getName() // Name of the facet
+                +-&gt; .getType() // Type of the facet
+                +-&gt; .getEntries() // Get facet entries as list
+                        |
+                        +-&gt; .getTerm() // Get facet term
+                        +-&gt; .getCount() // Get facet count
++-&gt; .getStats() // Stats. Will be present only if query parameters had a stats parameter
+        |
+        +-&gt; .getStats() // Map of field and stats
+                |
+        +-&gt; .getStat(String fieldName) // Stats for field : fieldName
+                |
+                +-&gt; .getCount() // Count of all values
+                +-&gt; .getMin() // Minimum value
+                +-&gt; .getMax() // Maximum value
+                +-&gt; .getSum() // Sum of all values
+                +-&gt; .getMean() // Mean of all values
++-&gt; .getBuckets() // Get Buckets. Only present when a bucket call was made
+        |
+        +-&gt; .getNumberOfBuckets() // Number of buckets
+        +-&gt; .getBucket(String value) // Get Bucket for field value
+        +-&gt; .getBuckets() // List of buckets
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-autosuggest-client">
+<h1>Using AutoSuggest Client<a class="headerlink" href="#using-autosuggest-client" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="making-an-autosuggest-call">
+<h2>Making an AutoSuggest Call<a class="headerlink" href="#making-an-autosuggest-call" title="Permalink to this headline">¶</a></h2>
+<p>The AutoSuggest Call can be made in two different ways</p>
+<div class="section" id="id1">
+<h3>Sync Call<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>It can be used inside an <strong>AsyncTask</strong> for making the search call non blocking.</p>
+<p>The following code snippet will make a autosuggest call with query &#8220;shi&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre>import com.unbxd.client.Unbxd;
+import com.unbxd.client.autosuggest.AutoSuggestClient;
+import com.unbxd.client.autosuggest.response.AutoSuggestResponse;
+
+AutoSuggestResponse response = Unbxd.getAutoSuggestClient().autosuggest(&quot;shi&quot;).execute();
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Async Call<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>The following code snippet will make a autosuggest call with query &#8220;shi&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre>import com.unbxd.client.Unbxd;
+import com.unbxd.client.AsyncResponse;
+import com.unbxd.client.autosuggest.AutoSuggestClient;
+
+
+AsyncResponse asyncResponse = new AsyncResponse() {
+        @Override
+        public void processResponse(String output) {
+        // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void processErrors(String output) {
+        // TODO Auto-generated method stub
+
+        }
+        };
+
+Unbxd.getAutoSuggestClient().autosuggest(&quot;shi&quot;).execute(asyncResponse, getApplicationContext());
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="understanding-autosuggestresponse">
+<h2>Understanding AutoSuggestResponse<a class="headerlink" href="#understanding-autosuggestresponse" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>response
+|
++-&gt; .getStatusCode() // 200 if success.
++-&gt; .getErrorCode() // error code
++-&gt; .getMessage() // Get error message if any
++-&gt; .getQueryTime() // Time taken to generate suggestions
++-&gt; .getTotalResultsCount() // Number of suggestions
++-&gt; .getResults() // Results
+        |
+        +-&gt; .getResultSections() // Map of AutoSuggestType and AutoSuggestResultSection
+                |
+        +-&gt; .getInFieldSuggestions() // Get In Field Suggestions
+                |
+        +-&gt; .getPopularProducts() // Get Popular Products Suggestions
+                |
+        +-&gt; .getKeywordSuggestions() // Get Keyword Suggestions
+                |
+        +-&gt; .getTopQueries() // Get Suggested Top Queries
+                |
+                +-&gt; .getResultsCount() // Number of suggestions
+                +-&gt; .getAt(int i) // Get at index i
+                        |
+                +-&gt; .getResults() // Get suggestions as array()
+                        |
+                        +-&gt; .getSuggestion() // Get suggestion
+                        +-&gt; .getAttributes() // Get attributes as map
+                        +-&gt; .getAttribute(String fieldName) // Get attribute with name : fieldName
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-unbxdanalytics-client">
+<h1>Using UnbxdAnalytics Client<a class="headerlink" href="#using-unbxdanalytics-client" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="instantiate-the-client">
+<h2>Instantiate the Client<a class="headerlink" href="#instantiate-the-client" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>import com.unbxd.client.Unbxd;
+import com.unbxd.client.unbxdanalytics.UnbxdAnalytics;
+
+UnbxdAnalytics analytics = Unbxd.getUnbxdAnalyticsClient(this.getApplicationContext());
+</pre></div>
+</div>
+</div>
+<div class="section" id="track-product-click">
+<h2>Track Product Click<a class="headerlink" href="#track-product-click" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>Map&lt;String,String&gt; params = new HashMap&lt;String, String&gt;();
+params.put(&quot;pid&quot;, &quot;12345&quot;);//product id
+params.put(&quot;prank&quot;, &quot;&quot;);//the rank/position of the product
+params.put(&quot;boxtype&quot;, &quot;&quot;);//recommendation box type
+analytics.track(&quot;click&quot;,params);
+</pre></div>
+</div>
+</div>
+<div class="section" id="track-search-event">
+<h2>Track Search Event<a class="headerlink" href="#track-search-event" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>Map&lt;String,String&gt; params = new HashMap&lt;String, String&gt;();
+params.put(&quot;query&quot;, &quot;shirts&quot;);//the query searched
+analytics.track(&quot;search&quot;,params);
+</pre></div>
+</div>
+</div>
+<div class="section" id="track-browse-event">
+<h2>Track Browse Event<a class="headerlink" href="#track-browse-event" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>Map&lt;String,String&gt; params = new HashMap&lt;String, String&gt;();
+params.put(&quot;category&quot;, &quot;shoes&quot;);//the category browsed
+analytics.track(&quot;browse&quot;, params);
+</pre></div>
+</div>
+</div>
+<div class="section" id="track-addtocarts">
+<h2>Track AddToCarts<a class="headerlink" href="#track-addtocarts" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>Map&lt;String,String&gt; params = new HashMap&lt;String, String&gt;();
+params.put(&quot;pid&quot;, &quot;12345&quot;);
+analytics.track(&quot;addToCart&quot;, params);
+</pre></div>
+</div>
+</div>
+<div class="section" id="track-product-orders">
+<h2>Track product orders<a class="headerlink" href="#track-product-orders" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>Map&lt;String,String&gt; params = new HashMap&lt;String, String&gt;();
+params.put(&quot;pid&quot;, &quot;12345&quot;); //product id
+params.put(&quot;qty&quot;, &quot;3&quot;); //product quantity
+params.put(&quot;price&quot;, &quot;45&quot;);//product price
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a></li>
+<li><a class="reference internal" href="#adding-the-dependency">Adding the dependency</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#using-search-client">Using Search Client</a><ul>
+<li><a class="reference internal" href="#making-a-search-call">Making a Search Call</a><ul>
+<li><a class="reference internal" href="#sync-call">Sync Call</a></li>
+<li><a class="reference internal" href="#async-call">Async Call</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#making-a-bucketing-call">Making a Bucketing Call</a></li>
+<li><a class="reference internal" href="#making-a-browse-call">Making a Browse Call</a></li>
+<li><a class="reference internal" href="#understanding-searchresponse">Understanding SearchResponse</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-autosuggest-client">Using AutoSuggest Client</a><ul>
+<li><a class="reference internal" href="#making-an-autosuggest-call">Making an AutoSuggest Call</a><ul>
+<li><a class="reference internal" href="#id1">Sync Call</a></li>
+<li><a class="reference internal" href="#id2">Async Call</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#understanding-autosuggestresponse">Understanding AutoSuggestResponse</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-unbxdanalytics-client">Using UnbxdAnalytics Client</a><ul>
+<li><a class="reference internal" href="#instantiate-the-client">Instantiate the Client</a></li>
+<li><a class="reference internal" href="#track-product-click">Track Product Click</a></li>
+<li><a class="reference internal" href="#track-search-event">Track Search Event</a></li>
+<li><a class="reference internal" href="#track-browse-event">Track Browse Event</a></li>
+<li><a class="reference internal" href="#track-addtocarts">Track AddToCarts</a></li>
+<li><a class="reference internal" href="#track-product-orders">Track product orders</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to android-sdk-doc&#8217;s documentation!</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/sdk.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to android-sdk-doc’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">android-sdk-doc 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, suprit.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
