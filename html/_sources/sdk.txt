@@ -9,13 +9,18 @@ You will be able to do the following through this SDK:
 * Make Recommendation calls
 * Make Analytics calls to collect user engagement data
 
-For details you can refer to the source on `GitHub <https://github.com/unbxd/android-sdk>`_.	
+ The SDK can be obtained from `android-sdk <https://github.com/unbxd/android-sdk>`_.	
 
-Adding the dependency
-=====================
+Adding the dependency in the AndroidManifest.xml
+=================================================
 
 * <uses-permission android:name="android.permission.INTERNET" />
 * <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+
+Adding external libraries to the project
+========================================
+
+External jars can be obtained from here `External-Library <https://github.com/unbxd/android-sdk/tree/master/external-libraries>`_.
 
 
 Configuration
