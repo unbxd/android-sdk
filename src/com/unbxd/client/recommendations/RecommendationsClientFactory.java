@@ -1,5 +1,7 @@
 package com.unbxd.client.recommendations;
 
+import android.content.Context;
+
 /**
  * Created with IntelliJ IDEA.
  * User: sourabh
@@ -9,7 +11,6 @@ package com.unbxd.client.recommendations;
  */
 public class RecommendationsClientFactory {
 
-	public static RecommendationsClient getRecommendationsClient(String siteKey, String apiKey, boolean secure){
-		return new RecommendationsClient(siteKey, apiKey, secure);
-	}
-}
+    public static RecommendationsClient getRecommendationsClient(Context context, String siteKey, String apiKey, boolean secure){
+        return new RecommendationsClient(context, siteKey, apiKey, secure);
+    }
