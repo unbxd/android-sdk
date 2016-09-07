@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/padding_small"
+    android:background="@color/bg_clr">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_clr"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_small">
+
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/frame_layout"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/posted_image"
+                android:layout_width="@dimen/product_size"
+                android:layout_height="@dimen/product_size"
+                />
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/frame_layout"
+            android:padding="@dimen/post_padding_1">
+
+            <RelativeLayout
+                android:id="@+id/detail_full"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_5dp">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/btn_cart"
+                    android:layout_margin="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true">
+
+                    <TextView
+                        android:id="@+id/title_id"
+                        android:text="title"
+                        android:lines="2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/padding_5dp"
+                        android:textColor="@color/txtBlack" />
+
+                    <TextView
+                        android:id="@+id/detail_price"
+                        android:text="20000"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/title_id"
+                        android:layout_marginLeft="@dimen/padding_5dp"
+                        android:textColor="@color/txtBlack" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
