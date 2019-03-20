@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">UnbxdSDK</string>
+    <string name="BASE_SEARCH_URL">https://search.unbxd.io/API_KEY/SITE_KEY/search?</string>
+    <string name="BASE_BROWSE_URL">https://search.unbxd.io/API_KEY/SITE_KEY/category?</string>
+    <string name="BASE_AUTOSUGGEST_URL">https://search.unbxd.io/API_KEY/SITE_KEY/autosuggest?</string>
+    <string name="BASE_ANALYTICS_URL">https://tracker.unbxdapi.com/v2/1p.jpg?</string>
+    <string name="BASE_RECOMMENDATION_URL">https://recommendations.unbxdapi.com/v1.0/API_KEY/SITE_KEY/</string>
+    <string name="BASE_PRODUCTDETAILS_URL">https://search.unbxd.io/sites/SITE_KEY/products/</string>
+</resources>
