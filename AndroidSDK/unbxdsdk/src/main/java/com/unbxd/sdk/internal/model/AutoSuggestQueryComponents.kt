@@ -113,6 +113,7 @@ class DocTypePopularProducts private constructor(builder: DocTypePopularProducts
     var fields: Array<String>? = null
 
     init {
+        this.resultCount = builder.resultCount
         this.fields = builder.fields
     }
     class Builder {

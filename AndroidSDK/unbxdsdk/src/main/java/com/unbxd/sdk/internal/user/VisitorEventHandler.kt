@@ -94,7 +94,7 @@ internal class VisitorEventHandler {
             requestId = ""
         }
 
-        val visitorAnalytics = VisitorAnalytics(userId.id, userId.visitType, requestId!!)
+        val visitorAnalytics = VisitorAnalytics(userId.id, userId.visitType, requestId)
 
         class CompletionHandler: ICompletionHandler {
             override fun onSuccess(json: JSONObject, response: Response) {
@@ -114,7 +114,7 @@ internal class VisitorEventHandler {
     }
 
     private fun Response.unbxdRequestId(): String? {
-        val allHeaders = this.headers()
+        val allHeaders = this.headers
 
         var requestId = allHeaders.get("Unbxd-Request-Id")
 

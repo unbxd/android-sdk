@@ -12,88 +12,72 @@ class RecommendationRequestBuilder: RequestBuilderBase() {
 
         when(recommendationQuery) {
             is RecommendedForYourRecommendation -> {
-                val queryRef = recommendationQuery as RecommendedForYourRecommendation
+                val queryRef = recommendationQuery
                 urlStr += queryRef.recommendationType.jsonKey
 
                 urlStr += "/${queryRef.uid}"
             }
             is RecentlyViewedRecommendation -> {
-                val queryRef = recommendationQuery as RecentlyViewedRecommendation
+                val queryRef = recommendationQuery
                 urlStr += queryRef.recommendationType.jsonKey
 
                 urlStr += "/${queryRef.uid}"
             }
             is MoreLikeThisRecommendation -> {
-                val queryRef = recommendationQuery as MoreLikeThisRecommendation
+                val queryRef = recommendationQuery
                 urlStr += queryRef.recommendationType.jsonKey
 
-                if (queryRef.productId != null) {
-                    urlStr += "/${queryRef.productId}"
-                }
+                urlStr += "/${queryRef.productId}"
 
                 urlStr += Constants.kUIDLabel + queryRef.uid
             }
             is ViewedAlsoViewedRecommendation -> {
-                val queryRef = recommendationQuery as ViewedAlsoViewedRecommendation
+                val queryRef = recommendationQuery
                 urlStr += queryRef.recommendationType.jsonKey
 
-                if (queryRef.productId != null) {
-                    urlStr += "/${queryRef.productId}"
-                }
+                urlStr += "/${queryRef.productId}"
 
                 urlStr += Constants.kUIDLabel + queryRef.uid
             }
             is BoughtAlsoBoughtRecommendation -> {
-                val queryRef = recommendationQuery as BoughtAlsoBoughtRecommendation
-                urlStr += queryRef.recommendationType.jsonKey
+                urlStr += recommendationQuery.recommendationType.jsonKey
 
-                if (queryRef.productId != null) {
-                    urlStr += "/${queryRef.productId}"
-                }
+                urlStr += "/${recommendationQuery.productId}"
 
-                urlStr += Constants.kUIDLabel + queryRef.uid
+                urlStr += Constants.kUIDLabel + recommendationQuery.uid
             }
             is CartRecommendation -> {
-                val queryRef = recommendationQuery as CartRecommendation
+                val queryRef = recommendationQuery
                 urlStr += queryRef.recommendationType.jsonKey
 
                 urlStr += "/${queryRef.uid}"
             }
             is HomePageTopSellersRecommendation -> {
-                val queryRef = recommendationQuery as HomePageTopSellersRecommendation
-                urlStr += queryRef.recommendationType.jsonKey
+                urlStr += recommendationQuery.recommendationType.jsonKey
 
-                urlStr += "?" + Constants.kUIDLabel + queryRef.uid
+                urlStr += "?" + Constants.kUIDLabel + recommendationQuery.uid
             }
             is CategoryTopSellersRecommendation -> {
-                val queryRef = recommendationQuery as CategoryTopSellersRecommendation
-                urlStr += queryRef.recommendationType.jsonKey
+                urlStr += recommendationQuery.recommendationType.jsonKey
 
-                if (queryRef.categoryName != null) {
-                    urlStr += "/${queryRef.categoryName}"
-                }
+                urlStr += "/${recommendationQuery.categoryName}"
 
-                urlStr += "?" + Constants.kUIDLabel + queryRef.uid
+                urlStr += "?" + Constants.kUIDLabel + recommendationQuery.uid
             }
             is PDPTopSellersRecommendation -> {
-                val queryRef = recommendationQuery as PDPTopSellersRecommendation
+                val queryRef = recommendationQuery
                 urlStr += queryRef.recommendationType.jsonKey
 
-                if (queryRef.productId != null) {
-                    urlStr += "/${queryRef.productId}"
-                }
+                urlStr += "/${queryRef.productId}"
 
                 urlStr += "?" + Constants.kUIDLabel + queryRef.uid
             }
             is BrandTopSellersRecommendation -> {
-                val queryRef = recommendationQuery as BrandTopSellersRecommendation
-                urlStr += queryRef.recommendationType.jsonKey
+                urlStr += recommendationQuery.recommendationType.jsonKey
 
-                if (queryRef.brand != null) {
-                    urlStr += "/${queryRef.brand}"
-                }
+                urlStr += "/${recommendationQuery.brand}"
 
-                urlStr += "?" + Constants.kUIDLabel + queryRef.uid
+                urlStr += "?" + Constants.kUIDLabel + recommendationQuery.uid
             }
         }
 

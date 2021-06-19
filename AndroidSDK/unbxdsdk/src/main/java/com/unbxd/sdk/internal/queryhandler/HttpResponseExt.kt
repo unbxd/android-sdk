@@ -4,7 +4,7 @@ import okhttp3.Response
 
 class HttpResponseExt {
     fun Response.unbxdRequestId(): String? {
-        val allHeaders = this.headers()
+        val allHeaders = this.headers
 
         var requestId = allHeaders.get("Unbxd-Request-Id")
 

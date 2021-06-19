@@ -26,28 +26,26 @@ internal class RequestHandler: IRequestHandler {
 
         Log.d("Requesting...", request.toString())
 
-        if (request != null) {
-            client.newCall(request).enqueue(object : Callback {
-                override fun onResponse(call: Call, response: Response) {
-                    if (response.code() == 200 && response.body() != null) {
-                        var jsonData = response.body()!!.string()
-                        if (!isJSONValid(jsonData)) {
-                            jsonData = "{}"
-                        }
-
-                        val jsonObject = JSONObject(jsonData)
-                        completionHandler.onSuccess(jsonObject, response)
+        client.newCall(request).enqueue(object : Callback {
+            override fun onResponse(call: Call, response: Response) {
+                if (response.code == 200 && response.body != null) {
+                    var jsonData = response.body!!.string()
+                    if (!isJSONValid(jsonData)) {
+                        jsonData = "{}"
                     }
-                    else {
-                        completionHandler.onFailure("Invalid JSON Response", IOException())
-                    }
-                }
 
-                override fun onFailure(call: Call, e: IOException) {
-                    completionHandler.onFailure(e.localizedMessage, e)
+                    val jsonObject = JSONObject(jsonData)
+                    completionHandler.onSuccess(jsonObject, response)
                 }
-            })
-        }
+                else {
+                    completionHandler.onFailure("Invalid JSON Response", IOException())
+                }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                completionHandler.onFailure(e.localizedMessage!!, e)
+            }
+        })
     }
 
     private fun isJSONValid(test: String): Boolean {

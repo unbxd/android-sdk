@@ -1,8 +1,6 @@
 package com.unbxd.sdk.internal.model
 
-import com.unbxd.sdk.internal.enums.AnalyticsActionType
-import com.unbxd.sdk.internal.enums.PageType
-import com.unbxd.sdk.internal.enums.RecommendationType
+import com.unbxd.sdk.internal.enums.*
 
 abstract class AnalyticsBase(internal var uid: String, internal var visitType: String, internal var requestId: String, internal var actionType: AnalyticsActionType)
 
@@ -17,6 +15,13 @@ class CategoryPageAnalytics(uid: String, visitType: String, requestId: String, c
 
 class ProductClickAnalytics(uid: String, visitType: String, requestId: String, productId: String, var query: String? = null, var boxType: String? = null) : AnalyticsBase(uid, visitType, requestId, AnalyticsActionType.ProductClick) {
     var productId: String? = productId
+}
+
+class ProductClickAnalyticsV2(uid: String, visitType: String, requestId: String, pID: String, query: String? = null, pageType: RecsV2PageType? = null, widget: Widget? = null) : AnalyticsBase(uid, visitType, requestId, AnalyticsActionType.ProductClick) {
+    var pID: String? = pID
+    var query: String? = query
+    var widget: Widget? = widget
+    var pageType: RecsV2PageType? = pageType
 }
 
 class ProductAddToCartAnalytics(uid: String, visitType: String, requestId: String, productId: String, variantId: String, quantity: Int) : AnalyticsBase(uid, visitType, requestId, AnalyticsActionType.AddToCart) {
@@ -52,6 +57,13 @@ class AutoSuggestAnalytics(uid: String, visitType: String, requestId: String, sk
  class RecommendationWidgetAnalytics(uid: String, visitType: String, requestId: String, var recommendationType: RecommendationType, productIds: Array<String>) : AnalyticsBase(uid, visitType, requestId, AnalyticsActionType.RecommendationWidgetImpression) {
      var pids: Array<String> = productIds
  }
+
+class RecommendationWidgetAnalyticsV2(uid: String, visitType: String, requestId: String, pageType: RecsV2PageType, widget: Widget? = null, identifier: String? = null, productIds: Array<String>? = null) : AnalyticsBase(uid, visitType, requestId, AnalyticsActionType.RecommendationWidgetImpression) {
+    var pageType: RecsV2PageType = pageType
+    var widget: Widget? = widget
+    var identifier: String? = identifier
+    var pids: Array<String>? = productIds
+}
 
  class SearchImpressionAnalytics(uid: String, visitType: String, requestId: String, query: String, productIds: Array<String>) : AnalyticsBase(uid, visitType, requestId, AnalyticsActionType.SearchImpression) {
      var pids: Array<String>? = productIds

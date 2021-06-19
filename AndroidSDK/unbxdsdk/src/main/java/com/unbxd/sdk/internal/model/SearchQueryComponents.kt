@@ -182,11 +182,11 @@ open class CategoryFilterBase {
 }
 
 class CategoryIdFilter: CategoryFilterBase {
-    constructor(type: ReferenceType, categories: Array<String>): super(ReferenceType.TypeId, categories)
+    constructor(categories: Array<String>): super(ReferenceType.TypeId, categories)
 }
 
 class CategoryNameFilter: CategoryFilterBase {
-    constructor(type: ReferenceType, categories: Array<String>): super(ReferenceType.TypeName, categories)
+    constructor(categories: Array<String>): super(ReferenceType.TypeName, categories)
 }
 
 open class MultipleFilterBase {

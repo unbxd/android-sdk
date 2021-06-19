@@ -136,21 +136,29 @@ class SearchRequestBuilder: RequestBuilderBase() {
 
             if (multiFilter.operatorType == FilterOperatorType.AND) {
 
-                for (textFilter in multiFilter.filters) {
+                for (filter in multiFilter.filters) {
 
-                    when (textFilter) {
+                    when (filter) {
                         is IdFilter -> {
-                            val idFilter = textFilter as? IdFilter
+                            val idFilter = filter as? IdFilter
 
                             if (idFilter != null) {
                                 filterStr += Constants.kIdFilterLabel + idFilter.field + ":\"${idFilter.value}\""
                             }
                         }
                         is NameFilter -> {
-                            val nameFilter = textFilter as? NameFilter
+                            val nameFilter = filter as? NameFilter
 
                             if (nameFilter != null) {
                                 filterStr += Constants.kNameFilterLabel + nameFilter.field + ":\"${nameFilter.value}\""
+                            }
+                        }
+                        is FilterRangeBase -> {
+                            if (filter is NameFilterRange) {
+                                filterStr += Constants.kNameFilterLabel + filter.field + ":" + "[${filter.lowerRange} TO ${filter.upperRange}]"
+                            }
+                            else if (filter is IdFilterRange) {
+                                filterStr += Constants.kIdFilterLabel + filter.field + ":" + "[${filter.lowerRange} TO ${filter.upperRange}]"
                             }
                         }
                     }
@@ -163,13 +171,24 @@ class SearchRequestBuilder: RequestBuilderBase() {
                 val fields = ArrayList<String>()
 
                 for (filter in multiFilter.filters) {
+                    when(filter) {
+                        is TextFilter -> {
+                            val fieldStr = "${filter.field}:\"${filter.value}\""
+                            fields.add(fieldStr)
+                        }
+                        is FilterRangeBase -> {
+                            val fieldStr = "[${filter.lowerRange} TO ${filter.upperRange}]"
+                            fields.add(fieldStr)
+                        }
+                    }
+                }
 
-                    val textFilter = filter as? TextFilter
-
-                    if (textFilter != null) {
-                        val fieldStr = "${textFilter.field}:\"${textFilter.value}\""
-
-                        fields.add(fieldStr)
+                when(multiFilter) {
+                    is MultipleIdFilter -> {
+                        urlStr+= Constants.kIdFilterLabel + fields.joinToString(" OR ")
+                    }
+                    is MultipleNameFilter -> {
+                        urlStr+= Constants.kNameFilterLabel + fields.joinToString(" OR ")
                     }
                 }
             }

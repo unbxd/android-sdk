@@ -1,7 +1,9 @@
 package com.unbxd.sdk.internal.model
 
 import com.unbxd.sdk.internal.enums.RecommendationType
+import com.unbxd.sdk.internal.enums.RecsV2PageType
 import com.unbxd.sdk.internal.enums.ResponseFormat
+import com.unbxd.sdk.internal.enums.Widget
 
 
 open class RecommendationQueryBase (builder: RecommendationQueryBase.BaseBuilder){
@@ -180,6 +182,51 @@ class CompleteTheLookRecommendation private constructor(builder: CompleteTheLook
         var productId = productId
 
         override fun build() = CompleteTheLookRecommendation(this)
+    }
+}
+
+class RecommendationV2 private constructor(builder: Builder): RecommendationQueryBase(builder){
+    var pageType: RecsV2PageType = builder.pageType
+    var widget: Widget? = null
+    var id: String? = null
+    var ip: String? = null
+    var brand: String? = null
+    var categoryLevelNames: Array<String>? = null
+
+    init {
+        this.widget = builder.widget
+        this.id = builder.id
+        this.ip = builder.ip
+        this.brand = builder.brand
+        this.categoryLevelNames = builder.categoryLevelNames
+    }
+
+    class Builder(uid: String, pageType: RecsV2PageType): RecommendationQueryBase.BaseBuilder(uid, RecommendationType.None) {
+        var pageType = pageType
+            private set
+
+        var widget: Widget? = null
+            private set
+
+        var id: String? = null
+            private set
+
+        var ip: String? = null
+            private set
+
+        var brand: String? = null
+            private set
+
+        var categoryLevelNames: Array<String>? = null
+            private set
+
+        fun widget(widget: Widget) = apply { this.widget  = widget}
+        fun id(id: String) = apply { this.id  = id}
+        fun ip(ip: String) = apply { this.ip  = ip}
+        fun brand(brand: String) = apply { this.brand  = brand}
+        fun categoryLevelNames(categoryLevelNames: Array<String>) = apply { this.categoryLevelNames  = categoryLevelNames}
+
+        override fun build() = RecommendationV2(this)
     }
 }
 

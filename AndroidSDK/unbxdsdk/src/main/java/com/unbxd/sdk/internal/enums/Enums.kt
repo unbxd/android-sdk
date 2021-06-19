@@ -51,3 +51,15 @@ enum class UbError(var errorMessage: String) {
     FailedEncodingUrl("Error while encoding request URL."),
     FailedParsingResponse("Error while paring response JSON.")
 }
+
+enum class RecsV2PageType(var jsonKey: String) {
+    None(""), Home("HOME"), Category("CATEGORY"), Brand("BRAND"), Pdp("PRODUCT"), Cart("CART")
+}
+
+enum class RecsVersion {
+    Version1, Version2
+}
+
+enum class Widget(var jsonKey: String) {
+    None(""), Widget1("WIDGET1"), Widget2("WIDGET2"), Widget3("WIDGET3")
+}

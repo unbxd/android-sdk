@@ -27,13 +27,13 @@ internal class AnalyticsRequestBuilder: RequestBuilderBase() {
                 dataComponents.add(Constants.kAnalyticsQueryLabel + "\"${analyticsQuery.searchKey}\"")
             }
             is CategoryPageAnalytics -> {
-                val categoryPageAnalytics = analyticsQuery as CategoryPageAnalytics
+                val categoryPageAnalytics = analyticsQuery
                 val categoryPath = categoryPageAnalytics.categoryInfo.path
                 dataComponents.add(Constants.kAnalyticsPageLabel + "\"$categoryPath\"")
                 dataComponents.add(Constants.kAnalyticePagePathLabel + "\"${categoryPageAnalytics.pageType.jsonKey}\"")
             }
             is ProductClickAnalytics -> {
-                val productClickInfo = analyticsQuery as ProductClickAnalytics
+                val productClickInfo = analyticsQuery
                 if (productClickInfo.productId != null) {
                     dataComponents.add(Constants.kAnalyticsPIDLabel + "\"${productClickInfo.productId}\"")
                 }
@@ -46,8 +46,26 @@ internal class AnalyticsRequestBuilder: RequestBuilderBase() {
                     dataComponents.add(Constants.kAutoSuggestBoxTypeLabel + "\"${productClickInfo.boxType}\"")
                 }
             }
+            is ProductClickAnalyticsV2 -> {
+                val productClickInfo = analyticsQuery
+                if (productClickInfo.pID != null) {
+                    dataComponents.add(Constants.kAnalyticsPIDLabel + "\"${productClickInfo.pID}\"")
+                }
+
+                if (productClickInfo.query != null) {
+                    dataComponents.add(Constants.kAnalyticsQueryLabel + "\"${productClickInfo.query}\"")
+                }
+
+                if (productClickInfo.pageType != null) {
+                    dataComponents.add(Constants.kExperiencePageType + "\"${productClickInfo.pageType!!.jsonKey}\"")
+                }
+
+                if (productClickInfo.widget != null) {
+                    dataComponents.add(Constants.kExperienceWidgetType + "\"${productClickInfo.widget!!.jsonKey}\"")
+                }
+            }
             is ProductAddToCartAnalytics -> {
-                val addToCartInfo = analyticsQuery as ProductAddToCartAnalytics
+                val addToCartInfo = analyticsQuery
                 if (addToCartInfo.productId != null) {
                     dataComponents.add(Constants.kAnalyticsPIDLabel + "\"${addToCartInfo.productId}\"")
                 }
@@ -61,7 +79,7 @@ internal class AnalyticsRequestBuilder: RequestBuilderBase() {
                 }
             }
             is ProductOrderAnalytics -> {
-                val productOrderInfo = analyticsQuery as ProductOrderAnalytics
+                val productOrderInfo = analyticsQuery
                 if (productOrderInfo.productId != null) {
                     dataComponents.add(Constants.kAnalyticsPIDLabel + "\"${productOrderInfo.productId}\"")
                 }
@@ -75,13 +93,13 @@ internal class AnalyticsRequestBuilder: RequestBuilderBase() {
                 }
             }
             is ProductDisplayPageViewAnalytics -> {
-                val productDisplayInfo = analyticsQuery as ProductDisplayPageViewAnalytics
+                val productDisplayInfo = analyticsQuery
                 if (productDisplayInfo.skuId != null) {
                     dataComponents.add(Constants.kAnalyticsPIDLabel + "\"${productDisplayInfo.skuId}\"")
                 }
             }
             is CartRemovalAnalytics -> {
-                val cartRemovalInfo = analyticsQuery as CartRemovalAnalytics
+                val cartRemovalInfo = analyticsQuery
                 if (cartRemovalInfo.skuId != null) {
                     dataComponents.add(Constants.kAnalyticsPIDLabel + "\"${cartRemovalInfo.skuId}\"")
                 }
@@ -96,7 +114,7 @@ internal class AnalyticsRequestBuilder: RequestBuilderBase() {
             }
             is AutoSuggestAnalytics -> {
 
-                val autoSuggestInfo = analyticsQuery as AutoSuggestAnalytics
+                val autoSuggestInfo = analyticsQuery
 
                 val autoSuggestDataArr = ArrayList<String>()
 
@@ -135,7 +153,7 @@ internal class AnalyticsRequestBuilder: RequestBuilderBase() {
                 dataComponents.add(autoSuggestDataStr)
             }
             is RecommendationWidgetAnalytics -> {
-                val recommendationInfo = analyticsQuery as RecommendationWidgetAnalytics
+                val recommendationInfo = analyticsQuery
 
                 dataComponents.add(Constants.kAutoSuggestBoxTypeLabel + "\"${recommendationInfo.recommendationType.boxType}\"")
 
@@ -152,8 +170,36 @@ internal class AnalyticsRequestBuilder: RequestBuilderBase() {
 
                 dataComponents.add(Constants.kAutoSuggestPidsLabel + "[$pidsStr]")
             }
+            is RecommendationWidgetAnalyticsV2 -> {
+                val recommendationInfo = analyticsQuery
+
+                dataComponents.add(Constants.kExperiencePageType + "\"${recommendationInfo.pageType.jsonKey}\"")
+
+                if (recommendationInfo.widget != null) {
+                    dataComponents.add(Constants.kExperienceWidgetType + "\"${recommendationInfo.widget!!.jsonKey}\"")
+                }
+
+                if (recommendationInfo.identifier != null) {
+                    dataComponents.add(Constants.kAnalyticsIdentifier + "\"${recommendationInfo.identifier}\"")
+                }
+
+                if (!recommendationInfo.pids.isNullOrEmpty()) {
+                    var pidsStr = ""
+                    val pidArr = ArrayList<String>()
+
+                    for (pid in recommendationInfo.pids!!) {
+                        pidArr.add("\"$pid\"")
+                    }
+
+                    if (pidArr.isNotEmpty()) {
+                        pidsStr = pidArr.joinToString(",")
+                    }
+
+                    dataComponents.add(Constants.kAutoSuggestPidsLabel + "[$pidsStr]")
+                }
+            }
             is SearchImpressionAnalytics -> {
-                val searchImpressionInfo = analyticsQuery as SearchImpressionAnalytics
+                val searchImpressionInfo = analyticsQuery
 
                 if (searchImpressionInfo.query != null) {
                     dataComponents.add(Constants.kAnalyticsQueryLabel + "\"${searchImpressionInfo.query}\"")
@@ -175,7 +221,7 @@ internal class AnalyticsRequestBuilder: RequestBuilderBase() {
                 }
             }
             is CategoryPageImpressionAnalytics -> {
-                val pageImpressionInfo = analyticsQuery as CategoryPageImpressionAnalytics
+                val pageImpressionInfo = analyticsQuery
 
                 val categoryPath = pageImpressionInfo.categoryInfo.path
                 dataComponents.add(Constants.kAnalyticsPageLabel + categoryPath)
@@ -200,7 +246,7 @@ internal class AnalyticsRequestBuilder: RequestBuilderBase() {
                 }
             }
             is DwellTimeAnalytics -> {
-                val dwellTimeInfo = analyticsQuery as DwellTimeAnalytics
+                val dwellTimeInfo = analyticsQuery
 
                 dataComponents.add(Constants.kAnalyticsPIDLabel + "\"${dwellTimeInfo.productId}\"")
 
@@ -208,7 +254,7 @@ internal class AnalyticsRequestBuilder: RequestBuilderBase() {
 
             }
             is FacetAnalytics -> {
-                val facetInfo = analyticsQuery as FacetAnalytics
+                val facetInfo = analyticsQuery
 
                 dataComponents.add(Constants.kAnalyticsQueryLabel + "\"${facetInfo.query}\"")
 

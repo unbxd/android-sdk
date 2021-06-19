@@ -51,6 +51,14 @@ abstract class RequestBuilderBase {
             }
         }
 
+        class RecommendationTypeV2(): RequestType() {
+            override fun baseURL(): String {
+                //val baseUrl: String = R.string.BASE_RECOMMENDATION_URL.toString()
+                val baseUrl = "http://recommendations.unbxd.io/v2.0/API_KEY/SITE_KEY/items?"
+                return this.addKey(baseUrl)
+            }
+        }
+
         class ProductDetails(): RequestType() {
             override fun baseURL(): String {
                 //val baseUrl: String = R.string.BASE_PRODUCTDETAILS_URL.toString()

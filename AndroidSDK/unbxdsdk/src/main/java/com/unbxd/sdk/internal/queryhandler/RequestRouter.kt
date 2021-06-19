@@ -1,8 +1,8 @@
 package com.unbxd.sdk.internal.queryhandler
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import com.unbxd.sdk.ICompletionHandler
 import android.os.Build
 import okhttp3.Headers
@@ -17,7 +17,8 @@ import org.json.JSONObject
 
 internal class RequestRouter private constructor(): IRequestRouter {
 
-    private object Holder { val INSTANCE = RequestRouter() }
+    private object Holder { @SuppressLint("StaticFieldLeak")
+    val INSTANCE = RequestRouter() }
 
     private val visitorHandler = VisitorEventHandler()
 
@@ -26,6 +27,7 @@ internal class RequestRouter private constructor(): IRequestRouter {
     companion object {
         val sharedInstance: RequestRouter by lazy { Holder.INSTANCE }
 
+        @SuppressLint("StaticFieldLeak")
         var context: Context? = null
     }
 
@@ -60,8 +62,11 @@ internal class RequestRouter private constructor(): IRequestRouter {
 
     private fun isInternetAvailable(): Boolean {
         val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
-        return activeNetwork?.isConnectedOrConnecting == true
+        val activeNetwork = cm.activeNetwork
+        if (activeNetwork != null) {
+            return true
+        }
+        return false
     }
 
     private fun deviceInformationHeaders(auth: Boolean): Headers {
@@ -85,7 +90,7 @@ internal class RequestRouter private constructor(): IRequestRouter {
             val stringId = applicationInfo.labelRes
             val appName = if (stringId == 0) applicationInfo.nonLocalizedLabel.toString() else context?.getString(stringId)
 
-            val version = context!!.packageManager.getPackageInfo(Companion.context?.packageName, 0).versionName
+            val version = context!!.packageManager.getPackageInfo(context!!.packageName, 0).versionName
 
             val devicePlatform = "Android"
 
@@ -149,7 +154,13 @@ internal class RequestRouter private constructor(): IRequestRouter {
     }
 
     override fun recommend(query: RecommendationQueryBase, completionHandler: ICompletionHandler) {
-        val requestBuilder = RecommendationRequestBuilder()
+
+        val requestBuilder: RequestBuilderBase = if (query is RecommendationV2) {
+            RecommendationV2RequestBuilder()
+        }
+        else {
+            RecommendationRequestBuilder()
+        }
 
         val urlString = requestBuilder.parse(query)
 
