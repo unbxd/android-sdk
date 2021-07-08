@@ -30,6 +30,18 @@ class RecommendationV2RequestBuilder: RequestBuilderBase() {
             urlStr += Constants.kRecsWidgetLabel + recommendationQuery.widget!!.jsonKey
         }
 
+        if (!recommendationQuery.pids.isNullOrEmpty()) {
+            urlStr += "&"
+
+            val pids_names = recommendationQuery.pids!!
+            var pid_names = arrayListOf<String>()
+            pids_names.forEach{ element ->
+                pid_names.add("id=" + element)
+            }
+            urlStr += pid_names.joinToString("&")
+        }
+
+
         if (!recommendationQuery.categoryLevelNames.isNullOrEmpty()) {
             urlStr += "&"
 

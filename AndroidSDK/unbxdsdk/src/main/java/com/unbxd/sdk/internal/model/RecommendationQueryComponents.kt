@@ -191,6 +191,7 @@ class RecommendationV2 private constructor(builder: Builder): RecommendationQuer
     var id: String? = null
     var ip: String? = null
     var brand: String? = null
+    var pids: Array<String>? = null
     var categoryLevelNames: Array<String>? = null
 
     init {
@@ -198,6 +199,7 @@ class RecommendationV2 private constructor(builder: Builder): RecommendationQuer
         this.id = builder.id
         this.ip = builder.ip
         this.brand = builder.brand
+        this.pids = builder.pids
         this.categoryLevelNames = builder.categoryLevelNames
     }
 
@@ -217,6 +219,9 @@ class RecommendationV2 private constructor(builder: Builder): RecommendationQuer
         var brand: String? = null
             private set
 
+        var pids: Array<String>? = null
+            private set
+
         var categoryLevelNames: Array<String>? = null
             private set
 
@@ -224,6 +229,7 @@ class RecommendationV2 private constructor(builder: Builder): RecommendationQuer
         fun id(id: String) = apply { this.id  = id}
         fun ip(ip: String) = apply { this.ip  = ip}
         fun brand(brand: String) = apply { this.brand  = brand}
+        fun pids(pids: Array<String>) = apply { this.pids  = pids}
         fun categoryLevelNames(categoryLevelNames: Array<String>) = apply { this.categoryLevelNames  = categoryLevelNames}
 
         override fun build() = RecommendationV2(this)

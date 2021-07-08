@@ -14,7 +14,7 @@ abstract class RequestBuilderBase {
         class Search(): RequestType() {
             override fun baseURL(): String {
                 //val baseUrl: String = R.string.BASE_SEARCH_URL.toString()
-                val baseUrl = "http://search.unbxd.io/API_KEY/SITE_KEY/search?"
+                val baseUrl = "https://search.unbxd.io/API_KEY/SITE_KEY/search?"
                 return this.addKey(baseUrl)
             }
         }
@@ -22,7 +22,7 @@ abstract class RequestBuilderBase {
         class Browse(): RequestType() {
             override fun baseURL(): String {
                 //val baseUrl: String = R.string.BASE_BROWSE_URL.toString()
-                val baseUrl = "http://search.unbxd.io/API_KEY/SITE_KEY/category?"
+                val baseUrl = "https://search.unbxd.io/API_KEY/SITE_KEY/category?"
                 return this.addKey(baseUrl)
             }
         }
@@ -30,7 +30,7 @@ abstract class RequestBuilderBase {
         class Autosuggest(): RequestType() {
             override fun baseURL(): String {
                 //val baseUrl: String = R.string.BASE_AUTOSUGGEST_URL.toString()
-                val baseUrl = "http://search.unbxd.io/API_KEY/SITE_KEY/autosuggest?"
+                val baseUrl = "https://search.unbxd.io/API_KEY/SITE_KEY/autosuggest?"
                 return this.addKey(baseUrl)
             }
         }
@@ -38,7 +38,7 @@ abstract class RequestBuilderBase {
         class Analytics(): RequestType() {
             override fun baseURL(): String {
                 //val baseUrl: String = R.string.BASE_ANALYTICS_URL.toString()
-                val baseUrl = "http://tracker.unbxdapi.com/v2/1p.jpg?"
+                val baseUrl = "https://tracker.unbxdapi.com/v2/1p.jpg?"
                 return this.addKey(baseUrl)
             }
         }
@@ -46,7 +46,7 @@ abstract class RequestBuilderBase {
         class Recommendation(): RequestType() {
             override fun baseURL(): String {
                 //val baseUrl: String = R.string.BASE_RECOMMENDATION_URL.toString()
-                val baseUrl = "http://recommendations.unbxdapi.com/v1.0/API_KEY/SITE_KEY/"
+                val baseUrl = "https://recommendations.unbxdapi.com/v1.0/API_KEY/SITE_KEY/"
                 return this.addKey(baseUrl)
             }
         }
@@ -54,7 +54,7 @@ abstract class RequestBuilderBase {
         class RecommendationTypeV2(): RequestType() {
             override fun baseURL(): String {
                 //val baseUrl: String = R.string.BASE_RECOMMENDATION_URL.toString()
-                val baseUrl = "http://recommendations.unbxd.io/v2.0/API_KEY/SITE_KEY/items?"
+                val baseUrl = "https://recommendations.unbxd.io/v2.0/API_KEY/SITE_KEY/items?"
                 return this.addKey(baseUrl)
             }
         }
@@ -62,7 +62,7 @@ abstract class RequestBuilderBase {
         class ProductDetails(): RequestType() {
             override fun baseURL(): String {
                 //val baseUrl: String = R.string.BASE_PRODUCTDETAILS_URL.toString()
-                val baseUrl = "http://search.unbxd.io/sites/SITE_KEY/products/"
+                val baseUrl = "https://search.unbxd.io/sites/SITE_KEY/products/"
                 return this.addKey(baseUrl)
             }
         }
